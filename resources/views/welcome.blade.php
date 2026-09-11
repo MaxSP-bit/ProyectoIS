@@ -219,5 +219,12 @@
         @if (Route::has('login'))
             <div class="h-14.5 hidden lg:block"></div>
         @endif
+
+        <h2>Integrantes del equipo</h2>
+        <p>Soto Palao Maximiliano</p>
+        <p>Ochoa Trejo José Fernando</p>
+        <p>Mendoza Moreno Luis Diego (Paris)</p>
+        <p>Castellanos Marín Noemí</p>
+
     </body>
 </html>
