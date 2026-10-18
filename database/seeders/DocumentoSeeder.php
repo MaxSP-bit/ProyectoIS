@@ -9,9 +9,9 @@ class DocumentoSeeder extends Seeder
 {
     public function run(): void
     {
-        Documento::firstOrCreate(
-            ['docu_folio' => 'FOLIO_DE_PRUEBA'],
-            ['docu_descripcion' => 'Descripción del documento de prueba']
-        );
+        Documento::create([
+            'docu_folio' => 'FOLIO_DE_PRUEBA',
+            'docu_descripcion' => 'Descripción del documento de prueba',
+        ]);
     }
 }
