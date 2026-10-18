@@ -12,8 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('contribuyente_', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id('cont_id_contribuyente');
+            $table->string('nombre');
+            $table->string('apellidoPaterno');
+            $table->string('apellidoMaterno');
+            $table->string('cont_razon_social');
+            $table->string('cont_rfc');
         });
     }
 

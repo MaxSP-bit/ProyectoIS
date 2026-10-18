@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('estado_documento', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id('esdo_id_estado_documento');
+            $table->string('esdo_estado_documento');
         });
     }
 

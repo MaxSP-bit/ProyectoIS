@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('documento_', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id('docu_id_documento');
+            $table->string('docu_folio');
+            $table->text('docu_descripcion');
         });
     }
 
