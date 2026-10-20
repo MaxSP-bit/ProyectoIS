@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\EstadoDocumento;
 use Illuminate\Database\Seeder;
-use App\Models\EstadoDocumento;
+
 
 class EstadoDocumentoSeeder extends Seeder
 {

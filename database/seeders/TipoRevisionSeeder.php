@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+
 use App\Models\TipoRevision;
 use Illuminate\Database\Seeder;
 
