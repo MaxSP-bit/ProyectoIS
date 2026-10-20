@@ -4,8 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Oficio;
 
-class oficioSeeder extends Seeder
+class OficioSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,8 +14,8 @@ class oficioSeeder extends Seeder
     public function run(): void
     {
         Oficio::create([
-            'ofic_descripcion' => 'Oficio de prueba',
-            'tipo_revision_id' => 1, 
+            'ofic_descripcion' => 'Oficio de revisión por discrepancias fiscales detectadas en el ejercicio.',
+            'tipo_revision_id' => 1,
         ]);
     }
 }

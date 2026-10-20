@@ -4,8 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\TipoDocumento;
 
-class tipoDocumentoSeeder extends Seeder
+class TipoDocumentoSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,7 +14,15 @@ class tipoDocumentoSeeder extends Seeder
     public function run(): void
     {
         TipoDocumento::create([
-            'tipodoc_descripcion' => 'Tipo de documento de prueba',
+            'tido_tipo_documento' => 'Factura',
+        ]);
+
+        TipoDocumento::create([
+            'tido_tipo_documento' => 'Estado de cuenta',
+        ]);
+
+        TipoDocumento::create([
+            'tido_tipo_documento' => 'Declaración',
         ]);
     }
 }

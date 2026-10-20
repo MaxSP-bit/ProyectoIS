@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Documento;
 use Illuminate\Database\Seeder;
+use App\Models\Documento;
 
 class DocumentoSeeder extends Seeder
 {

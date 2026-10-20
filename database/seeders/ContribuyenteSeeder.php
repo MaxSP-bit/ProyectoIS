@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Contribuyente;
 use Illuminate\Database\Seeder;
+use App\Models\Contribuyente;
 
 class ContribuyenteSeeder extends Seeder
 {
