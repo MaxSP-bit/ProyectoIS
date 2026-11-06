@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password', 'puesto_id'])]
+#[Fillable(['name', 'email', 'password', 'puesto_id', 'empleado_id'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -30,8 +30,15 @@ class User extends Authenticatable
         return $this->belongsTo(Puesto::class, 'puesto_id', 'pues_id_puesto');
     }
 
+    public function empleado(): BelongsTo
+    {
+        return $this->belongsTo(Empleado::class, 'empleado_id', 'empl_id_empleado');
+    }
+
     public function esPuesto(string ...$puestos): bool
 {
+    $nombrePuesto = $this->puesto?->pues_nombre ?? $this->empleado?->puesto?->pues_nombre; 
+
     return in_array($this->puesto?->pues_nombre, $puestos, true);
 }
 }
