@@ -20,4 +20,10 @@ class Puesto extends Model
     {
         return $this->hasMany(Empleado::class, 'puesto_id', 'pues_id_puesto');
     }
+
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class, 'puesto_id', 'pues_id_puesto');
+    }
+
 }
