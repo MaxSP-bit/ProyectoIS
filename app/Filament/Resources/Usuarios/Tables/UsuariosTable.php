@@ -18,11 +18,30 @@ class UsuariosTable
                  TextColumn::make('id')
                     ->label('ID')
                     ->searchable(),
+
                 TextColumn::make('name')
                     ->label('Nombre')
                     ->searchable(),
+
                 TextColumn::make('email')
                     ->label('Correo')
+                    ->searchable(),
+
+                TextColumn::make('puesto.pues_nombre')
+                    ->label('Puesto')
+                    ->sortable()
+                    ->searchable(),
+                    
+                TextColumn::make('empleado.empl_nombre_pila')
+                    ->label('Empleado Vinculado')
+                    ->formatStateUsing(function ($record) {
+                        if ($record->empleado) {
+                            return $record->empleado->empl_nombre_pila . ' ' . 
+                                   $record->empleado->empl_apaterno . ' ' . 
+                                   $record->empleado->empl_amaterno;
+                        }
+                        return 'Sin asignar';
+                    })
                     ->searchable(),
             ])
             ->filters([
