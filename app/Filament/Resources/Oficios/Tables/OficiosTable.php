@@ -9,12 +9,14 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 
 class OficiosTable
 {
     public static function configure(Table $table): Table
     {
         return $table
+            ->defaultSort('ofic_fecha_creacion', direction: 'desc')
             ->columns([
                 TextColumn::make('ofic_descripcion')
                     ->label('Descripción')
@@ -27,16 +29,18 @@ class OficiosTable
 
                 TextColumn::make('ofic_fecha_creacion')
                     ->label('Fecha de creación')
-                    ->dateTime()
+                    ->dateTime('d/m/Y H:i')
                     ->sortable(),
             ])
             ->filters([
-                //
+                SelectFilter::make('tipo_revision_id')
+                    ->label('Tipo de revisión')
+                    ->relationship('tipoRevision', 'tire_tipo_revision'),
             ])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
-                DeleteAction::make(),
+                ViewAction::make()->label('Ver'),
+                EditAction::make()->label('Editar'),
+                DeleteAction::make()->label('Eliminar'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
