@@ -7,6 +7,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Table;
+use Filament\Tables\Columns\TextColumn;
 
 class UsuariosTable
 {
@@ -14,7 +15,15 @@ class UsuariosTable
     {
         return $table
             ->columns([
-                //
+                 TextColumn::make('id')
+                    ->label('ID')
+                    ->searchable(),
+                TextColumn::make('name')
+                    ->label('Nombre')
+                    ->searchable(),
+                TextColumn::make('email')
+                    ->label('Correo')
+                    ->searchable(),
             ])
             ->filters([
                 //
