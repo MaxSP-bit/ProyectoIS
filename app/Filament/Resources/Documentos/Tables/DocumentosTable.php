@@ -93,7 +93,7 @@ class DocumentosTable
             ->recordUrl(null)
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    //DeleteBulkAction::make(),
                 ]),
             ]);
     }

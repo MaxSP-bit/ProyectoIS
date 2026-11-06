@@ -20,4 +20,11 @@ class CreateDocumento extends CreateRecord
     {
         return 'Documento creado';
     }
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        $data['esdo_id_estado_documento'] = 1;
+
+        return $data;
+    }
 }

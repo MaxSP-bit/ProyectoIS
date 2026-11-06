@@ -15,7 +15,7 @@ return new class extends Migration
             $table->date('docu_fecha_creacion')->nullable();
             $table->unsignedInteger('tido_id_tipo_documento')->nullable();
             $table->unsignedBigInteger('ofic_id_oficio')->nullable();
-            $table->unsignedBigInteger('esdo_id_estado_documento')->nullable();
+            $table->unsignedBigInteger('esdo_id_estado_documento')->default('1');
             $table->unsignedBigInteger('cont_id_contribuyente')->nullable();
         });
     }
