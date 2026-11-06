@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Oficio extends Model
 {
@@ -23,5 +24,10 @@ class Oficio extends Model
     public function tipoRevision(): BelongsTo
     {
         return $this->belongsTo(TipoRevision::class, 'tipo_revision_id', 'tire_id_tipo_revision');
+    }
+
+    public function documentos(): HasMany
+    {
+        return $this->hasMany(Documento::class, 'ofic_id_oficio', 'ofic_id_oficio');
     }
 }

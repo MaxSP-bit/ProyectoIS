@@ -2,15 +2,22 @@
 
 namespace App\Filament\Resources\Documentos\Tables;
 
+use App\Models\Documento;
+use App\Models\EstadoDocumento;
+use App\Models\TipoDocumento;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\Action;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Actions\DeleteAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\Filter;
+use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+
 
 class DocumentosTable
 {
@@ -42,7 +49,7 @@ class DocumentosTable
                     ->searchable(),
 
                 TextColumn::make('docu_fecha_creacion')
-                    ->label('Creado el')
+                    ->label('Fecha de creación')
                     ->date()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -65,19 +72,22 @@ class DocumentosTable
                         2 => 'Cancelado',
                         3 => 'Entregado',
                     ]),
-                /*Filter::make('fecha')
+                Filter::make('fecha')
                     ->label('Fecha de creación')
                     ->schema([
                         DatePicker::make('desde'),
                         DatePicker::make('hasta'),
                     ])
                     ->query(fn (Builder $query, array $data) => $query
-                        ->when($data['desde'], fn ($q, $d) => $q->whereDate('docu_fecha_creacion'))
-                    )*/
+                        ->when($data['desde'], fn ($q, $d) => $q->whereDate('docu_fecha_creacion', '>=', $d))
+                        ->when($data['hasta'], fn ($q, $d) => $q->whereDate('docu_fecha_creacion', '<=', $d))
+                    ),
             ])
+
             ->recordActions([
                 EditAction::make(),
                 ViewAction::make(),
+                DeleteAction::make(),        
             ])
             ->recordAction(null)
             ->recordUrl(null)
