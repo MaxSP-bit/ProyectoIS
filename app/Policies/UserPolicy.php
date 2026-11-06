@@ -12,7 +12,8 @@ class UserPolicy
      */
     public function viewAny(User $user): bool
     {
-        return in_array($user->role, ['auditor', 'supervisor', 'coordinador', 'jefe_area']);
+        $user->loadMissing('puesto');
+        return $user->esPuesto('Auditor', 'Supervisor', 'Coordinador', 'Jefe de Área', 'auditor', 'supervisor', 'coordinador', 'jefe_area');
     }
 
     /**
@@ -20,7 +21,8 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        return in_array($user->role, ['auditor', 'supervisor', 'coordinador', 'jefe_area']);
+        $user->loadMissing('puesto');
+        return $user->esPuesto('Auditor', 'Supervisor', 'Coordinador', 'Jefe de Área', 'auditor', 'supervisor', 'coordinador', 'jefe_area');
     }
 
     /**
@@ -28,7 +30,8 @@ class UserPolicy
      */
     public function create(User $user): bool
     {
-        return in_array($user->role, ['supervisor', 'coordinador', 'jefe_area']);
+        $user->loadMissing('puesto');
+        return $user->esPuesto('Supervisor', 'Coordinador', 'Jefe de Área', 'supervisor', 'coordinador', 'jefe_area');
     }
 
     /**
@@ -36,7 +39,8 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        return in_array($user->role, ['supervisor', 'coordinador', 'jefe_area']);
+        $user->loadMissing('puesto');
+        return $user->esPuesto('Supervisor', 'Coordinador', 'Jefe de Área', 'supervisor', 'coordinador', 'jefe_area');
     }
 
     /**
@@ -44,7 +48,8 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-        return in_array($user->role, ['supervisor', 'coordinador', 'jefe_area']);
+        $user->loadMissing('puesto');
+        return $user->esPuesto('Supervisor', 'Coordinador', 'Jefe de Área', 'supervisor', 'coordinador', 'jefe_area');
     }
 
     /**

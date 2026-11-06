@@ -12,25 +12,30 @@ class DocumentoPolicy
     // Todos los puestos pueden consultar
     public function viewAny(User $user): bool
     {
-        return $user->esPuesto('Auditor', 'Supervisor', 'Coordinador', 'Jefe de Área');
+        $user->loadMissing('puesto');
+        return $user->esPuesto('Auditor', 'Supervisor', 'Coordinador', 'Jefe de Área', 'auditor', 'supervisor', 'coordinador', 'jefe_area');
     }
 
     public function view(User $user, Documento $documento): bool
     {
-        return $user->esPuesto('Auditor', 'Supervisor', 'Coordinador', 'Jefe de Área');
+        $user->loadMissing('puesto');
+        return $user->esPuesto('Auditor', 'Supervisor', 'Coordinador', 'Jefe de Área', 'auditor', 'supervisor', 'coordinador', 'jefe_area');
     }
 
     // Supervisor en adelante, solo para Cancelado o Entregado
     public function solicitarCambioEstado(User $user, Documento $documento, string $estado): bool
     {
+        $user->loadMissing('puesto');
+        
         return in_array($estado, self::ESTADOS_CON_APROBACION, true)
-            && $user->esPuesto('Supervisor', 'Coordinador', 'Jefe de Área');
+            && $user->esPuesto('Supervisor', 'Coordinador', 'Jefe de Área', 'supervisor', 'coordinador', 'jefe_area');
     }
 
     // Coordinador en adelante
     public function aprobarCambioEstado(User $user, Documento $documento): bool
     {
-        return $user->esPuesto('Coordinador', 'Jefe de Área');
+        $user->loadMissing('puesto');
+        return $user->esPuesto('Coordinador', 'Jefe de Área', 'coordinador', 'jefe_area');
     }
 
     public function create(User $user): bool { return false; }

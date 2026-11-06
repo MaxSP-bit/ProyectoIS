@@ -13,7 +13,8 @@ class OficioPolicy
      */
     public function viewAny(User $user): bool
     {
-        return in_array($user->role, ['auditor', 'supervisor', 'coordinador', 'jefe_area']);
+        $user->loadMissing('puesto');
+        return $user->esPuesto('Jefe de Área', 'Supervisor', 'Auditor', 'Coordinador', 'jefe_area', 'supervisor', 'auditor', 'coordinador');
     }
 
     /**
@@ -21,7 +22,8 @@ class OficioPolicy
      */
     public function view(User $user, Oficio $oficio): bool
     {
-        return in_array($user->role, ['auditor', 'supervisor', 'coordinador', 'jefe_area']);
+        $user->loadMissing('puesto');
+        return $user->esPuesto('Jefe de Área', 'Supervisor', 'Auditor', 'Coordinador', 'jefe_area', 'supervisor', 'auditor', 'coordinador');
     }
 
     /**
@@ -29,7 +31,8 @@ class OficioPolicy
      */
     public function create(User $user): bool
     {
-        return in_array($user->role, ['supervisor', 'coordinador', 'jefe_area']);
+        $user->loadMissing('puesto');
+        return $user->esPuesto('Jefe de Área', 'Supervisor', 'Coordinador', 'jefe_area', 'supervisor', 'coordinador');
     }
 
     /**
@@ -37,7 +40,8 @@ class OficioPolicy
      */
     public function update(User $user, Oficio $oficio): bool
     {
-        return in_array($user->role, ['supervisor', 'coordinador', 'jefe_area']);
+        $user->loadMissing('puesto');
+        return $user->esPuesto('Jefe de Área', 'Supervisor', 'Coordinador', 'jefe_area', 'supervisor', 'coordinador');
     }
 
     /**
@@ -45,7 +49,9 @@ class OficioPolicy
      */
     public function delete(User $user, Oficio $oficio): bool
     {
-        $rolPermitido = in_array($user->role, ['supervisor', 'coordinador', 'jefe_area']);
+        $user->loadMissing('puesto');
+
+        $rolPermitido = $user->esPuesto('Jefe de Área', 'Supervisor', 'Coordinador', 'jefe_area', 'supervisor', 'coordinador');
 
         $documentosCancelados = $oficio->documentos()
             ->whereHas('estado', function ($query) {
