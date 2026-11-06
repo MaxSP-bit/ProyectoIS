@@ -28,4 +28,14 @@ class Documento extends Model
         return $this->belongsTo(EstadoDocumento::class, 'esdo_id_estado_documento', 'esdo_id_estado_documento');
     }
 
+    public function contribuyente(): BelongsTo
+    {
+        return $this->belongsTo(Contribuyente::class, 'cont_id_contribuyente', 'cont_id_contribuyente');
+    }
+
+    public function oficio(): BelongsTo
+    {
+        return $this->belongsTo(Oficio::class, 'ofic_id_oficio', 'ofic_id_oficio');
+    }
+
 }
