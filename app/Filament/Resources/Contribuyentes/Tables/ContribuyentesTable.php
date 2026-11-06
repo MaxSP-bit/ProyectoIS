@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Contribuyentes\Tables;
 
+use App\Models\Contribuyente;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -20,22 +21,19 @@ class ContribuyentesTable
                     ->label('ID')
                     ->badge()
                     ->searchable(),
-                    
-                TextColumn::make('nombre')
-                    ->label('Nombre')
+
+                TextColumn::make('contribuyente')
+                    ->label('Contribuyente / Razón Social')
+                    ->getStateUsing(function (Contribuyente $record): string {
+                        if (!empty($record->cont_razon_social)) {
+                            return $record->cont_razon_social;
+                        }
+                        return trim("{$record->nombre} {$record->apellidoPaterno} {$record->apellidoMaterno}");
+                    })
                     ->weight('bold')
-                    ->searchable(),
-
-                TextColumn::make('apellidoPaterno')
-                    ->label('Apellido Paterno')
-                    ->color('gray')
-                    ->searchable(),
-
-                TextColumn::make('cont_razon_social')
-                    ->label('Razón Social')
-                    ->icon('heroicon-m-building-office-2')
-                    ->color('primary')
-                    ->searchable(),
+                    ->icon(fn (Contribuyente $record) => $record->cont_razon_social ? 'heroicon-m-building-office-2' : 'heroicon-m-user')
+                    ->color(fn (Contribuyente $record) => $record->cont_razon_social ? 'primary' : 'gray')
+                    ->searchable(['nombre', 'apellidoPaterno', 'apellidoMaterno', 'cont_razon_social']),
 
                 TextColumn::make('cont_rfc')
                     ->label('RFC')

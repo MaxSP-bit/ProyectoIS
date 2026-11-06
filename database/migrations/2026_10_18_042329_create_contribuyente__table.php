@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('contribuyente_', function (Blueprint $table) {
             $table->id('cont_id_contribuyente');
-            $table->string('nombre');
-            $table->string('apellidoPaterno');
-            $table->string('apellidoMaterno');
-            $table->string('cont_razon_social');
+            $table->string('nombre')->nullable();
+            $table->string('apellidoPaterno')->nullable();
+            $table->string('apellidoMaterno')->nullable();
+            $table->string('cont_razon_social')->nullable();
             $table->string('cont_rfc');
         });
     }
