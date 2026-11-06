@@ -16,6 +16,12 @@ class Documento extends Model
     protected $fillable = [
         'docu_folio',
         'docu_descripcion',
+        'docu_fecha_creacion',
+        'tido_id_tipo_documento',
+        'esdo_id_estado_documento',
+        'cont_id_contribuyente',
+        'ofic_id_oficio',
+        'docu_archivo',
     ];
 
     public function tipo(): BelongsTo

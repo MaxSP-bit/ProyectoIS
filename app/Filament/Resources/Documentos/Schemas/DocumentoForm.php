@@ -61,6 +61,16 @@ class DocumentoForm
                     ->hiddenOn('create')
                     ->disabled(fn () => ! in_array(auth()->user()->rol, ['Jefe de área', 'Coordinador']))
                     ->live(),
+
+                FileUpload::make('docu_archivo')
+                    ->label('Archivo del documento')
+                    ->disk('public')
+                    ->directory('documentos')
+                    ->acceptedFileTypes(['application/pdf', 'image/png', 'image/jpeg'])
+                    ->maxSize(10240)
+                    ->downloadable()
+                    ->openable()
+                    ->columnSpanFull(),
             ]);
     }
 }

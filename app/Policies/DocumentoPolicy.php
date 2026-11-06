@@ -38,9 +38,27 @@ class DocumentoPolicy
         return $user->esPuesto('Coordinador', 'Jefe de Área', 'coordinador', 'jefe_area');
     }
 
-    public function create(User $user): bool { return false; }
-    public function update(User $user, Documento $documento): bool { return false; }
-    public function delete(User $user, Documento $documento): bool { return false; }
-    public function restore(User $user, Documento $documento): bool { return false; }
-    public function forceDelete(User $user, Documento $documento): bool { return false; }
+    public function create(User $user): bool { 
+        $user->loadMissing('puesto');
+        return $user->esPuesto('Supervisor', 'Coordinador', 'Jefe de Área', 'supervisor', 'coordinador', 'jefe_area');
+     }
+
+    public function update(User $user, Documento $documento): bool { 
+        $user->loadMissing('puesto');
+        return $user->esPuesto('Supervisor', 'Coordinador', 'Jefe de Área', 'supervisor', 'coordinador', 'jefe_area');
+    }
+
+    public function delete(User $user, Documento $documento): bool {
+        $user->loadMissing('puesto');
+        return $user->esPuesto('Supervisor', 'Coordinador', 'Jefe de Área', 'supervisor', 'coordinador', 'jefe_area');
+    }
+    public function restore(User $user, Documento $documento): bool { 
+        $user->loadMissing('puesto');
+        return $user->esPuesto('Supervisor', 'Coordinador', 'Jefe de Área', 'supervisor', 'coordinador', 'jefe_area');
+    }
+
+    public function forceDelete(User $user, Documento $documento): bool { 
+        $user->loadMissing('puesto');
+        return $user->esPuesto('Supervisor', 'Coordinador', 'Jefe de Área', 'supervisor', 'coordinador', 'jefe_area');
+     }
 }

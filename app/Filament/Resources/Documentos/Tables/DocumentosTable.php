@@ -37,7 +37,7 @@ class DocumentosTable
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
 
-                TextColumn::make('Contribuyente.cont_rfc')
+                TextColumn::make('contribuyente.cont_rfc')
                     ->label('Contribuyente')
                     ->searchable(),
 
@@ -87,8 +87,15 @@ class DocumentosTable
             ->recordActions([
                 EditAction::make(),
                 ViewAction::make(),
-                DeleteAction::make(),        
+                DeleteAction::make(), 
+                Action::make('abrir')
+                    ->label('Abrir archivo')
+                    ->icon('heroicon-o-document-arrow-down')
+                    ->url(fn (Documento $record) => asset('storage/' . $record->docu_archivo))
+                    ->openUrlInNewTab()
+                    ->visible(fn (Documento $record) => filled($record->docu_archivo)),      
             ])
+            
             ->recordAction(null)
             ->recordUrl(null)
             ->toolbarActions([
