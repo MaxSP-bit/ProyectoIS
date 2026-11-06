@@ -13,7 +13,10 @@ class ContribuyentePolicy
      */
     public function viewAny(User $user): bool
     {
-        return in_array($user->role, ['auditor', 'supervisor', 'coordinador', 'jefe_area']);
+        // Aseguramos cargar la relación del puesto si no está cargada
+        $user->loadMissing('puesto');
+
+        return $user->esPuesto('Jefe de Área', 'Supervisor', 'Auditor', 'Coordinador', 'jefe_area', 'supervisor', 'auditor', 'coordinador');
     }
 
     /**
@@ -21,7 +24,8 @@ class ContribuyentePolicy
      */
     public function view(User $user, Contribuyente $contribuyente): bool
     {
-        return in_array($user->role, ['auditor', 'supervisor', 'coordinador', 'jefe_area']);
+        $user->loadMissing('puesto');
+        return $user->esPuesto('Jefe de Área', 'Supervisor', 'Auditor', 'Coordinador', 'jefe_area', 'supervisor', 'auditor', 'coordinador');
     }
 
     /**
@@ -29,7 +33,8 @@ class ContribuyentePolicy
      */
     public function create(User $user): bool
     {
-       return in_array($user->role, ['supervisor', 'coordinador', 'jefe_area']);
+        $user->loadMissing('puesto');
+        return $user->esPuesto('Jefe de Área', 'Supervisor', 'Coordinador', 'jefe_area', 'supervisor', 'coordinador');
     }
 
     /**
@@ -37,7 +42,8 @@ class ContribuyentePolicy
      */
     public function update(User $user, Contribuyente $contribuyente): bool
     {
-        return in_array($user->role, ['supervisor', 'coordinador', 'jefe_area']);
+        $user->loadMissing('puesto');
+        return $user->esPuesto('Jefe de Área', 'Supervisor', 'Coordinador', 'jefe_area', 'supervisor', 'coordinador');
     }
 
     /**
@@ -45,7 +51,8 @@ class ContribuyentePolicy
      */
     public function delete(User $user, Contribuyente $contribuyente): bool
     {
-        return in_array($user->role, ['supervisor', 'coordinador', 'jefe_area']);
+        $user->loadMissing('puesto');
+        return $user->esPuesto('Jefe de Área', 'Coordinador', 'jefe_area', 'coordinador');
     }
 
     /**
