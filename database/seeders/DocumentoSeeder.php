@@ -4,11 +4,18 @@ namespace Database\Seeders;
 
 use App\Models\Documento;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class DocumentoSeeder extends Seeder
 {
     public function run(): void
     {
+         $archivosTipo = [
+            1 => 'factura-ejemplo.pdf',
+            2 => 'estado-cuenta-ejemplo.pdf',
+            3 => 'declaracion-ejemplo.pdf',
+        ];
         $documentos = [
             [
                 'docu_folio' => 'FOLIO-2026-001',
@@ -58,9 +65,17 @@ class DocumentoSeeder extends Seeder
         ];
 
         foreach ($documentos as $data) {
-            Documento::firstOrCreate(
-                ['docu_folio' => $data['docu_folio']], // Condición de búsqueda única
-                $data                                  // Datos a insertar si no existe
+            $nombreArchivo = $archivosTipo[$data['tido_id_tipo_documento']];
+            $origen = database_path('seeders/archivos/' . $nombreArchivo);
+
+            $ruta = 'documentos/' . $data['docu_folio'] . '.pdf';
+            Storage::disk('public')->put($ruta, File::get($origen));
+
+            $data['docu_archivo'] = $ruta;
+
+            Documento::updateOrCreate(
+                ['docu_folio' => $data['docu_folio']],
+                $data
             );
         }
     }

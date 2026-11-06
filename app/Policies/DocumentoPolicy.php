@@ -50,7 +50,10 @@ class DocumentoPolicy
 
     public function delete(User $user, Documento $documento): bool {
         $user->loadMissing('puesto');
-        return $user->esPuesto('Supervisor', 'Coordinador', 'Jefe de Área', 'supervisor', 'coordinador', 'jefe_area');
+        $documento->loadMissing('estado');
+
+        return $user->esPuesto('Supervisor', 'Coordinador', 'Jefe de Área', 'supervisor', 'coordinador', 'jefe_area')
+        && $documento->estado?->esdo_estado_documento === 'Cancelado';
     }
     public function restore(User $user, Documento $documento): bool { 
         $user->loadMissing('puesto');
